@@ -1,70 +1,57 @@
-pyskel
-======
+cosmicsense
+============
 
-.. image:: https://travis-ci.org/mapbox/pyskel.svg
-   :target: https://travis-ci.org/mapbox/pyskel
+.. image:: https://travis-ci.org/mapbox/cosmicsense.svg
+   :target: https://travis-ci.org/mapbox/cosmicsense
 
-.. image:: https://coveralls.io/repos/mapbox/pyskel/badge.png
-   :target: https://coveralls.io/r/mapbox/pyskel
+.. image:: https://coveralls.io/repos/mapbox/cosmicsense/badge.png
+   :target: https://coveralls.io/r/mapbox/cosmicsense
 
-A skeleton of a Python package with CLI and test suite included.
-   
-.. image:: https://farm4.staticflickr.com/3951/15672691531_3037819613_o_d.png
+A package around Cosmic Ray Neutron Sensing
 
-Customization quick start
--------------------------
 
-To use pyskel as the start of a new project, do the following, preferably in
-a virtual environment. Clone the repo.
+Install
+-------
 
-.. code-block:: console
+`cosmicsense` comes as a pure Python package. It requires several dependencies
+as listed in `requirements.txt`. We recommend `conda` for dependency management.
 
-    git clone https://github.com/mapbox/pyskel myproject
-    cd myproject
+1. Install Miniconda (https://conda.io/miniconda.html).
 
-Replace all occurrences of 'pyskel' with the name of your own project.
-(Note: the commands below require bash, find, and sed and are yet tested only on OS X.)
+2. Add the conda-forge channnel as the new default:
 
-.. code-block:: console
+```
+$ conda config --add channels conda-forge
+```
 
-    if [ -d pyskel ]; then find . -not -path './.git*' -type f -exec sed -i '' -e 's/pyskel/myproject/g' {} + ; fi
-    mv pyskel myproject
+3. Create a new `conda` environment:
 
-Then install in locally editable (``-e``) mode and run the tests.
+```
+$ conda create --name cosmicsense python=3.7
+```
 
-.. code-block:: console
+4. Activate the new environment:
 
-    pip install -e .[test]
-    py.test
+    Linux:
 
-Finally, give the command line program a try.
+    ```
+    $ source activate wradlib
+    ```
 
-.. code-block:: console
+    Windows:
 
-    myproject --help
-    myproject 4
+    ```
+    > activate wradlib
+    ```
 
-To help prevent uncustomized forks of pyskel from being uploaded to PyPI,
-I've configured the setup's upload command to dry run. Make sure to remove
-this configuration from
-`setup.cfg <https://docs.python.org/2/install/index.html#inst-config-syntax>`__
-when you customize pyskel.
+5. Install dependencies
 
-Please also note that the Travis-CI and Coveralls badge URLs and links in the README
-contain the string 'mapbox.' You'll need to change this to your own user or organization
-name and turn on the webhooks for your new project.
+```
+(cosmicsense) $ conda install numpy scipy matplotlib pandas notebook
+```
 
-A post on the Mapbox blog has more information about this project:
-https://www.mapbox.com/blog/pyskel/.
+6, Install `cosmicsense` package:
 
-See also
---------
-
-Here are a few other tools for initializing Python projects.
-
-- Paste Script's `paster create <http://pythonpaste.org/script/#paster-create>`__ is
-  one that I've used for a long time.
-- `cookiecutter-pypackage <https://github.com/audreyr/cookiecutter-pypackage>`__ is
-  a Cookiecutter template for a Python package. Cookiecutter supports many languages,
-  includes Travis configuration and much more.
-
+```
+(cosmicsense) $ python setup.py install
+```

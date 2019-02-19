@@ -7,15 +7,15 @@ with codecs_open('README.rst', encoding='utf-8') as f:
     long_description = f.read()
 
 
-setup(name='pyskel',
+setup(name='cosmicsense',
       version='0.0.1',
-      description=u"Skeleton of a Python package",
+      description=u"Cosmic Ray Neutron Sensing",
       long_description=long_description,
       classifiers=[],
       keywords='',
-      author=u"Sean Gillies",
-      author_email='sean@mapbox.com',
-      url='https://github.com/mapbox/pyskel',
+      author=u"The cosmicsense organisation",
+      author_email='heisterm@uni-potsdam.de',
+      url='https://github.com/cosmic-sense/cosmicsense',
       license='MIT',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
@@ -25,9 +25,5 @@ setup(name='pyskel',
       ],
       extras_require={
           'test': ['pytest'],
-      },
-      entry_points="""
-      [console_scripts]
-      pyskel=pyskel.scripts.cli:cli
-      """
+      }
       )
