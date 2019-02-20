@@ -1,7 +1,11 @@
-# cosmicsense
+#!/usr/bin/env python
+# Copyright (c) 2018-2019, cosmicsense developers.
+# Distributed under the MIT License. See LICENSE.txt for more info.
 
-has_legs = False
+"""
+cosmicsense
+===========
 
-def joke():
-    return (u'Wenn ist das Nunst\u00fcck git und Slotermeyer? Ja! ... '
-            u'Beiherhund das Oder die Flipperwaldt gersput.')
+"""
+
+from . import core
