@@ -3,8 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to cosmicsense's documentation!
-=======================================
+The CosmicSense Python Package Docs
+===================================
+
+These pages provide documentationo for the Python package `cosmicsense`.
 
 .. toctree::
    :maxdepth: 2
