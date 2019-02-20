@@ -3,16 +3,29 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-The CosmicSense Python Package Docs
-===================================
+===============
+``cosmicsense``
+===============
+--------------------------------------------------------
+From Cosmic Ray Neutron Counts to Soil Moisture Products
+--------------------------------------------------------
 
-These pages provide documentationo for the Python package `cosmicsense`.
+.. image:: _static/crns_in_the_field.JPG
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+These pages provide documentation of the ``cosmicsense`` package which is
+being developed as part of the CosmicSense Research Group funded by the German
+Research Foundation (Deutsche Forschungsgemeinschaft, DFG).
 
+The ``cosmicsense`` package provides a platform to collect algorithms and
+workflows to estimate soil moisture from cosmic ray neutron counters, and
+compare such estimates with other soil moisture products.
 
+ .. toctree::
+    :maxdepth: 2
+    :caption: Contents:
+
+    gettingstarted
+    reference
 
 Indices and tables
 ==================

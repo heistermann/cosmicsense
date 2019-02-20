@@ -6,7 +6,7 @@
 Fundamental equations
 ^^^^^^^^^^^^^^^^^^^^^
 
-Model `core` contains the fundamental equations of converting neutron counts
+Module ``core`` contains the fundamental equations of converting neutron counts
 to soil moisture.
 
 .. currentmodule:: cosmicsense.core
@@ -15,8 +15,7 @@ to soil moisture.
    :nosignatures:
    :toctree: generated/
 
-
-
+    n_to_theta
 
 """
 

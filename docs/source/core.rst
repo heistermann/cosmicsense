@@ -1,0 +1,2 @@
+
+.. automodule:: cosmicsense.core
