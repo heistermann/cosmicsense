@@ -1,11 +1,7 @@
 cosmicsense
 ============
 
-.. image:: https://travis-ci.org/mapbox/cosmicsense.svg
-   :target: https://travis-ci.org/mapbox/cosmicsense
-
-.. image:: https://coveralls.io/repos/mapbox/cosmicsense/badge.png
-   :target: https://coveralls.io/r/mapbox/cosmicsense
+[![Build Status](https://travis-ci.com/heistermann/cosmicsense.svg?branch=master)](https://travis-ci.com/heistermann/cosmicsense)
 
 A package around Cosmic Ray Neutron Sensing
 
