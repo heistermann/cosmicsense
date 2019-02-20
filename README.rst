@@ -1,7 +1,8 @@
 cosmicsense
 ============
 
-[![Build Status](https://travis-ci.com/heistermann/cosmicsense.svg?branch=master)](https://travis-ci.com/heistermann/cosmicsense)
+.. image:: https://travis-ci.com/heistermann/cosmicsense.svg?branch=master
+    :target: https://travis-ci.com/heistermann/cosmicsense
 
 A package around Cosmic Ray Neutron Sensing
 
