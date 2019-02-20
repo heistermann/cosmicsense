@@ -4,6 +4,10 @@ cosmicsense
 .. image:: https://travis-ci.com/heistermann/cosmicsense.svg?branch=master
     :target: https://travis-ci.com/heistermann/cosmicsense
 
+.. image:: https://readthedocs.org/projects/cosmicsense/badge/?version=latest
+    :target: https://cosmicsense.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+
 A package around Cosmic Ray Neutron Sensing
 
 
