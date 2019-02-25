@@ -1,0 +1,9 @@
+name: cosmicsense-docs
+channels:
+  - conda-forge
+dependencies:
+  - python=3.7
+  - jupyter
+  - sphinx
+  - sphinx_rtd_theme
+  - nbsphinx
