@@ -25,6 +25,7 @@ compare such estimates with other soil moisture products.
     :caption: Contents:
 
     gettingstarted
+    notebooks
     reference
 
 Indices and tables

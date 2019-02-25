@@ -43,7 +43,10 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.doctest',
     'sphinx.ext.mathjax',
+    'nbsphinx'
 ]
+
+exclude_patterns = ['_build', '**.ipynb_checkpoints', '*checkpoint.ipynb']
 
 autosummary_generate = True
 
