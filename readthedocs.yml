@@ -2,4 +2,4 @@ conda:
     file: environment_rtd.yml
 
 python:
-use_system_site_packages: true
+    use_system_site_packages: true
