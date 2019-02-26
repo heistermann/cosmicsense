@@ -19,6 +19,7 @@ to soil moisture.
 
 """
 
+import numpy as np
 
 def n_to_theta(n, n0, a0, a1, a2, rhob, rhow):
     """Convert neutron counts to theta.
