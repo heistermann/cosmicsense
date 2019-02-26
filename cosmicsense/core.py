@@ -48,7 +48,6 @@ def n_to_theta(n, n0, a0, a1, a2, rhob, rhow):
         Volumetric soil water content (m3/m3)
 
     """
-    test = pd.read_csv()
     return (a0 / (n/n0 -a1) - a2) * rhob / rhow
 
 
