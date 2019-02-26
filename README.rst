@@ -41,7 +41,7 @@ as listed in ``requirements.txt``. We recommend ``conda`` for dependency managem
 
 5. Install dependencies::
 
-      (cosmicsense) $ conda install numpy scipy matplotlib pandas jupyter
+      (cosmicsense) $ conda install -c conda-forge numpy scipy matplotlib pandas jupyter
 
 6. Install ``cosmicsense`` package from source::
 
