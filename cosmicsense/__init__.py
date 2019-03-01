@@ -9,3 +9,4 @@ cosmicsense
 """
 
 from . import core
+from . import conv

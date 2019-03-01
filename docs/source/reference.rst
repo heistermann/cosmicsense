@@ -5,3 +5,4 @@ Library Reference
    :maxdepth: 1
 
    core
+   conv
