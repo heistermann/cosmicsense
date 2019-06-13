@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Set working directory to script location
+cd "$(dirname "$0")"
+
+CONDA=~/miniconda3/bin
+SCRIPT=/media/x/cosmicsense/git/cosmicsense/scripts/getmail.py
+SCRIPTTARGET=/home/maik/b2drop/cosmicsense/inbox/fendt/timeseries/crns/JFC-1/
+CONDAENV=cosmic-sense
+GECKOPICSPASS=
+
+source $CONDA/activate $CONDAENV
+python $SCRIPT "$GECKOPICSPASS" "$SCRIPTTARGET"
+source $CONDA/deactivate

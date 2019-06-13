@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Set working directory to script location
+cd "$(dirname "$0")"
+
+CONDA=~/miniconda3/bin
+SCRIPT=/media/x/cosmicsense/git/cosmicsense/scripts/getbokehplots.py
+CONDAENV=cosmic-sense
+DATADIR=/home/maik/b2drop/cosmicsense/inbox/fendt/timeseries/crns/JFC-1/
+HTMLFILE=/media/x/cosmicsense/git/misc/fendt/crnsmonitor.html
+REPODIR=/media/x/cosmicsense/git/misc/
+IDS=[1,2,3,4,16,17,18,19,23,24]
+GITBIN=/usr/bin/git
+
+source $CONDA/activate $CONDAENV
+python $SCRIPT $IDS $DATADIR $HTMLFILE
+source $CONDA/deactivate
+
+cd $REPODIR
+$GITBIN add .
+$GITBIN commit -m "Update monitor"
+$GITBIN push origin master

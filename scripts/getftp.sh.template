@@ -1,0 +1,13 @@
+#!/bin/bash
+
+CONDA=~/miniconda3/bin
+SCRIPT=/media/x/cosmicsense/git/cosmicsense/scripts/getftp.py
+CONDAENV=cosmic-sense
+FTPUSER=
+FTPPW=
+TRGDIR=/media/x/cosmicsense/data/test
+
+
+source $CONDA/activate $CONDAENV
+python $SCRIPT "$FTPUSER" "$FTPPW" "$TRGDIR"
+source $CONDA/deactivate

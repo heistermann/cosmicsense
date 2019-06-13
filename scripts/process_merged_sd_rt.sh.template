@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Set working directory to script location
+cd "$(dirname "$0")"
+
+CONDA=~/miniconda3/bin
+SCRIPT=/media/x/cosmicsense/git/cosmicsense/scripts/process_merged_sd_rt.py
+CONDAENV=cosmic-sense
+
+source $CONDA/activate $CONDAENV
+python $SCRIPT
+source $CONDA/deactivate
