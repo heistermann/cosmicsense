@@ -182,7 +182,7 @@ for i, id in enumerate(ids):
     plts.append(p)
 
 
-grid = gridplot(plts, ncols=1)
+grid = gridplot(plts, merge_tools=False, ncols=1)
 
 output_file(htmlfile_merge, title="Time series of counts per hour")
 save(grid)
