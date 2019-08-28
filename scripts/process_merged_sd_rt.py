@@ -58,6 +58,8 @@ for id in ids:
             pass
     print(id, end=": ")
     print("%s to %s" % (df.index[0], df.index[-1]) )
+    # truncate end of campaign
+    df = df[:"2019-07-23 00:00:00"]
     crns[id] = df
 
 

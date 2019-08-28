@@ -36,6 +36,7 @@ for id in ids:
     df = df.set_index("datetime")
     print(id, end=": ")
     print("%s to %s" % (df.index[0], df.index[-1]) )
+    df = df[:"2019-07-23 00:00:00"]
     crns[id] = df
 
 min_dtime = np.min([crns[key].index[0] for key in crns.keys()])

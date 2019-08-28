@@ -11,3 +11,12 @@ dependencies:
   - sphinx
   - sphinx_rtd_theme
   - nbsphinx
+  - xlrd
+  - h5py
+  - netCDF4
+  - xarray
+  - gdal
+  - deprecation
+  - xmltodict
+  - semver
+  - wradlib
