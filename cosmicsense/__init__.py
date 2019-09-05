@@ -10,3 +10,4 @@ cosmicsense
 
 from . import core
 from . import conv
+from . import util
