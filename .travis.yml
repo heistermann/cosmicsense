@@ -1,8 +1,8 @@
 language: python
 python:
-  - "3.6"
+  - "3.7"
 install:
-  #- sudo apt-get update
+  - sudo apt-get update
   # We do this conditionally because it saves us some downloading if the
   # version is the same.
   - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
@@ -20,8 +20,8 @@ install:
   - conda config --add channels conda-forge
 #  - conda config --remove channels defaults
   - conda config --set channel_priority strict
-  - conda create -q -n test-env python=$TRAVIS_PYTHON_VERSION
-  - source activate test-env
+  - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
+  - conda activate test-environment
   - conda install -c conda-forge numpy scipy pandas matplotlib jupyter sphinx sphinx_rtd_theme nbsphinx xlrd h5py netCDF4 xarray gdal deprecation xmltodict semver wradlib
   - python setup.py install
   - "pip install coveralls"
@@ -31,4 +31,4 @@ script:
   - coverage run --source=cosmicsense -m py.test
 after_success:
   - coveralls
-sudo: false
+sudo: true
