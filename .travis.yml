@@ -2,7 +2,7 @@ language: python
 python:
   - "3.7"
 install:
-  - sudo apt-get update
+  #- sudo apt-get update
   # We do this conditionally because it saves us some downloading if the
   # version is the same.
   - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
@@ -31,4 +31,4 @@ script:
   - coverage run --source=cosmicsense -m py.test
 after_success:
   - coveralls
-sudo: true
+sudo: false
