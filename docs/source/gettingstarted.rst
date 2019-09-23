@@ -13,11 +13,15 @@ as listed in ``requirements.txt``. We recommend ``conda`` for dependency managem
 
       $ conda config --add channels conda-forge
 
-3. Create a new ``conda`` environment::
+3. Use strict channel priority to prevent channel clashes::
+
+      $ conda config --set channel_priority strict
+
+4. Create a new ``conda`` environment::
 
       $ conda create --name cosmicsense python=3.7
 
-4. Activate the new environment:
+5. Activate the new environment:
 
     **Linux**::
 
@@ -29,7 +33,7 @@ as listed in ``requirements.txt``. We recommend ``conda`` for dependency managem
 
 5. Install dependencies::
 
-      (cosmicsense) $ conda install numpy scipy matplotlib pandas jupyter
+      (cosmicsense) $ conda install numpy scipy pandas matplotlib jupyter xlrd h5py netCDF4 xarray gdal deprecation xmltodict semver wradlib
 
 6. Install ``cosmicsense`` package from source::
 
