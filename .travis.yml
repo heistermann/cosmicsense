@@ -23,6 +23,7 @@ install:
   - conda create -q -n test-env python=$TRAVIS_PYTHON_VERSION
   - source activate test-env
   - conda install -c conda-forge numpy scipy pandas matplotlib jupyter sphinx sphinx_rtd_theme nbsphinx xlrd h5py netCDF4 xarray gdal deprecation xmltodict semver wradlib
+  - python setup.py install
   - "pip install coveralls"
   - "pip install -e .[test]"
 script:
