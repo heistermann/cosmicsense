@@ -7,9 +7,11 @@ install:
   - export PATH="$HOME/miniconda/bin:$PATH"
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
+  - conda deactivate
   - conda config --add channels conda-forge
-  - conda config --remove channels defaults
-  - conda update --force conda
+#  - conda config --remove channels defaults
+  - conda config --set channel_priority strict
+  - conda update --yes conda
   - conda info -a
   - conda create -q -n test-env python=$TRAVIS_PYTHON_VERSION
   - source activate test-env
