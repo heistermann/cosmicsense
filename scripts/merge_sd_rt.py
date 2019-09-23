@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 import shutil
 
-
+# BLOCK FOR JFC1 AT FENDT
 rootdir = "/home/maik/b2drop/cosmicsense/inbox/fendt/timeseries/crns/JFC-1-sd"
 rtdir = "/home/maik/b2drop/cosmicsense/inbox/fendt/timeseries/crns/JFC-1"
 trgdir = "/media/x/cosmicsense/data/fendt/crns"
@@ -198,6 +198,9 @@ for id in id_all:
 
 for key in coll.keys():
     print(key)
+    if len(coll[key])==0:
+        print("No data")
+        continue
     coll[key].insert(loc=1, column="datetime", value=coll[key].index)
     fpath = os.path.join(trgdir, "%d/%d_CRNS_merge.txt" % (key, key) )
     coll[key].to_csv(fpath, sep="\t", index=False, date_format="%Y-%m-%d %H:%M:%S")

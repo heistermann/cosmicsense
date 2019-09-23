@@ -11,12 +11,12 @@ trgdir = sys.argv[3]
 ftp = ftplib.FTP('irgendwosonst.de')
 ftp.login(ftpuser , ftppw)
 
-probes = [1,2,3,4]
+probes = [1,2,4,21,22,26,27,28]
 
 for probe in probes:
     print("----------------------")
     print("Processing %d" % probe)
-    for file in ftp.nlst('jfc/sonde%d/' % probe):
+    for file in ftp.nlst('marquardt/sonde%d/' % probe):
         fname = os.path.basename(file)
         fpath = os.path.join(trgdir, str(probe), fname)
         if os.path.exists(fpath):

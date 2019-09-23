@@ -5,13 +5,14 @@ import os
 import subprocess
 
 
-#pressfile = "ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/climate/hourly/pressure/recent/stundenwerte_P0_02290_akt.zip"
-#tempfile = "ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/climate/hourly/air_temperature/recent/stundenwerte_TU_02290_akt.zip"
-#precfile = "ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/climate/hourly/precipitation/recent/stundenwerte_RR_02290_akt.zip"
-pressfile = "https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/pressure/recent/stundenwerte_P0_02290_akt.zip"
-tempfile = "https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/air_temperature/recent/stundenwerte_TU_02290_akt.zip"
-precfile = "https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/precipitation/recent/stundenwerte_RR_02290_akt.zip"
-localdir = "/media/x/cosmicsense/data/fendt/dwd"
+#pressfile = "https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/pressure/recent/stundenwerte_P0_02290_akt.zip"
+#tempfile = "https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/air_temperature/recent/stundenwerte_TU_02290_akt.zip"
+#precfile = "https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/precipitation/recent/stundenwerte_RR_02290_akt.zip"
+#localdir = "/media/x/cosmicsense/data/fendt/dwd"
+pressfile = "https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/pressure/recent/stundenwerte_P0_03987_akt.zip"
+tempfile = "https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/air_temperature/recent/stundenwerte_TU_03987_akt.zip"
+precfile = "https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/precipitation/recent/stundenwerte_RR_03987_akt.zip"
+localdir = "/media/x/cosmicsense/data/marquardt/dwd"
 
 def unzip(myzip, mytarget, pattern):
     with ZipFile(path.join(myzip), 'r') as zipObj:
