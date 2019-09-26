@@ -6,3 +6,6 @@ dependencies:
   - sphinx
   - sphinx_rtd_theme
   - nbsphinx
+  - numpy
+  - pandas
+  - scipy
