@@ -3,12 +3,13 @@ import io
 import os
 import sys
 
-ftpuser = sys.argv[1]
-ftppw = sys.argv[2]
-trgdir = sys.argv[3]
+ftpserver = sys.argv[1]
+ftpuser = sys.argv[2]
+ftppw = sys.argv[3]
+trgdir = sys.argv[4]
 
 
-ftp = ftplib.FTP('irgendwosonst.de')
+ftp = ftplib.FTP(ftpserver)
 ftp.login(ftpuser , ftppw)
 
 probes = [1,2,4,21,22,26,27,28]

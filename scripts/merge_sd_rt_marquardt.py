@@ -11,7 +11,7 @@ sddir = "/home/maik/b2drop/cosmicsense/inbox/marquardt/timeseries/crns/sd"
 remotedir = "/home/maik/b2drop/cosmicsense/inbox/marquardt/timeseries/crns/remote"
 trgdir = "/media/x/cosmicsense/data/marquardt/crns"
 tmpfile = "tmpfile.txt"
-ids = [1, 2, 4, 21, 22, 26, 27]
+ids = [1, 2, 4, 21, 22, 26, 27, 28]
 
 crns = {
      1: {"remotepattern": "up1_Data*.001*.txt",
@@ -53,9 +53,9 @@ crns = {
                       "volt", "counts1", "nsecs1", "counts2", "nsecs2"]
         },
 
-    28: {"remotepattern": "up28_Data*.028*.txt",
+    28: {"remotepattern": "sonde28_Data_*.028*",
          "sdpattern": "*.028",
-         "colnames": ["rec_id", "datetime", "press1", "press4", "temp1", "relhum1", "volt", "counts1", "nsecs1", "counts2", "nsecs2"]
+         "colnames": ["rec_id", "datetime", "press1", "press4", "temp1", "relhum1", "volt", "counts1", "nsecs1", "temp2", "relhum2"]
         }
 }
 
@@ -105,6 +105,7 @@ for i, id in enumerate(ids):
         body = body.replace("//", "#")
         # replace zombie line endings
         body = body.replace(",\r\n", "\r\n")
+        body = body.replace(",\n", "\n")
         # comment out these lines
         body = body.replace("CRS#1:", "#CRS#1")
         body = body.replace("CRS#2:", "#CRS#2")
