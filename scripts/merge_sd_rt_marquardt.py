@@ -11,6 +11,7 @@ sddir = "/home/maik/b2drop/cosmicsense/inbox/marquardt/timeseries/crns/sd"
 remotedir = "/home/maik/b2drop/cosmicsense/inbox/marquardt/timeseries/crns/remote"
 trgdir = "/media/x/cosmicsense/data/marquardt/crns"
 tmpfile = "tmpfile.txt"
+tmpfile2 = "tmpfile2.txt"
 ids = [1, 2, 4, 21, 22, 26, 27, 28]
 
 crns = {
@@ -50,7 +51,10 @@ crns = {
     27: {"remotepattern": "up27_Data*.027*.txt",
          "sdpattern": "*.027",
          "colnames": ["rec_id", "datetime", "press1", "temp1", "relhum1",
-                      "volt", "counts1", "nsecs1", "counts2", "nsecs2"]
+                      "volt", "counts1", "nsecs1", "counts2", "nsecs2"],
+         "colnames2": ["rec_id", "datetime", "press1", "temp1", "relhum1",
+                      "volt", "counts1", "nsecs1", "counts3", "nsecs3", "counts2", "nsecs2"]
+
         },
 
     28: {"remotepattern": "sonde28_Data_*.028*",
@@ -66,6 +70,7 @@ for i, id in enumerate(ids):
 
     try:
         os.remove(tmpfile)
+        os.remove(tmpfile2)
     except:
         pass
 
@@ -114,9 +119,35 @@ for i, id in enumerate(ids):
         myfile.close()
     print("")
 
+    if "colnames2" in crns[id].keys():
+        # Read all lines. potentially varying no of columns
+        myfile = open(tmpfile, 'r')
+        lines = myfile.readlines()
+        myfile.close()
+        # Write in seperate files
+        myfile = open(tmpfile, 'w')
+        myfile2 = open(tmpfile2, 'w')
+        for line in lines:
+            split = line.split(",")
+            if len(split)==len(crns[id]["colnames"]):
+                myfile.write(line+"\n")
+            if len(split)==len(crns[id]["colnames2"]):
+                myfile2.write(line+"\n")
+        myfile.close()
+        myfile2.close()
+
     # MERGE
     df = pd.read_csv(tmpfile, sep=",", comment="#", header=None, error_bad_lines=False, warn_bad_lines=True)
     df.columns = crns[id]["colnames"]
+    if "colnames2" in crns[id].keys():
+        try:
+            df2 = pd.read_csv(tmpfile2, sep=",", comment="#", header=None,
+                             error_bad_lines=False, warn_bad_lines=True)
+            df2.columns = crns[id]["colnames2"]
+            df = df2.append(df, sort=False)
+        except:
+            print("Problem in reading or appending data with diffferent column scenario")
+            raise
     df.datetime = pd.to_datetime(df.datetime, format="%Y/%m/%d %H:%M:%S")
     df = df.set_index("datetime")
     df.insert(loc=1, column="datetime", value=df.index)
