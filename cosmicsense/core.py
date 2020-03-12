@@ -150,6 +150,37 @@ def theta_to_n_desilets(theta, n0, a0=0.0808, a1=0.372, a2=0.115, rhob=1500., rh
     return n0 * (a1 + a0/(theta*(rhow/rhob) + a2))
 
 
+def theta_to_n_desilets(theta, n0, a0=0.0808, a1=0.372, a2=0.115, rhob=1500., rhow=1000.):
+    """Convert theta to neutron counts.
+
+    Based on inversion of equation from Desilets et al. (2010).
+
+    Parameters
+    ----------
+    theta : float
+        Volumetric soil water content (m3/m3)
+    n0 : integer
+        Local calibration factor
+    a0 : float
+        Parameter
+    a1 : float
+        Parameter
+    a2 : float
+        Parameter
+    rhob : float
+        Soil bulk density (kg/m3)
+    rhow : float
+        Density of water (kg/m3)
+
+    Returns
+    -------
+    output : float
+        Number of neutron counts.
+
+    """
+    return n0 * (a1 + a0/(theta*(rhow/rhob) + a2))
+
+
 def horizontal_weight_zreda2008a(r):
     """Horizontal weights according to Zreda et al. (2008).
 
