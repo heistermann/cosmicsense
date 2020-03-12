@@ -59,3 +59,6 @@ target/
 
 # Notebooks
 *-checkpoint.ipynb
+
+docs/source/notebooks/_oldbutkeep
+
