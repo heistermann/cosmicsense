@@ -17,30 +17,40 @@ ids = [1, 2, 4, 21, 22, 26, 27, 28]
 crns = {
      1: {"remotepattern": "up1_Data*.001*.txt",
          "sdpattern": "*.001",
-         "colnames": ["rec_id", "datetime", "press1", "temp1", "relhum1", "volt", "counts1", "nsecs1", "counts2", "nsecs2"]},
+         "colnames": ["rec_id", "datetime", "press1", "temp1", "relhum1", "volt", "counts1", "nsecs1", "counts2", "nsecs2"],
+         "colnames2": ["rec_id", "datetime", "press1", "temp1", "relhum1", "volt", "counts1", "nsecs1","counts2", "nsecs2", "sdiAdr","sdi1_1","sdi1_2","sdi1_3","sdi1_4"]
+        },
 
      2: {"remotepattern": "up2_Data*.002*.txt",
          "sdpattern": "*.002",
-         "colnames": ["rec_id", "datetime", "press1", "temp1", "relhum1", "volt", "counts1", "nsecs1"]
+         "colnames": ["rec_id", "datetime", "press1", "temp1", "relhum1", "volt", "counts1", "nsecs1"],
+         "colnames2": ["rec_id", "datetime", "press1", "temp1", "relhum1", "volt", "counts1", "nsecs1","sdiAdr","sdi1_1","sdi1_2","sdi1_3","sdi1_4","sdi1_5","sdi1_6"]
         },
 
      4: {"remotepattern": "up4_Data*.004*.txt",
          "sdpattern": "*.004",
          "colnames": ["rec_id", "datetime", "press1", "temp1", "relhum1", "volt",
                       "counts1", "nsecs1", "counts2", "nsecs2", "MetOne092_1","press4","temp_ext",
-                      "relhum_ext","N1T_C","N1RH","N2T_C","N2RH"]
+                      "relhum_ext","N1T_C","N1RH","N2T_C","N2RH"],
+         "colnames2": ["rec_id", "datetime", "press1", "temp1", "relhum1", "volt",
+                      "counts1", "nsecs1", "counts2", "nsecs2", "MetOne092_1","press4","temp_ext",
+                      "relhum_ext","N1T_C","N1RH","N2T_C","N2RH","sdiAdr","sdi2_1","sdi2_2","sdi2_3","sdi2_4"]
         },
 
     21: {"remotepattern": "CRSProbe_Data*.021*.txt",
           "sdpattern": "*.021",
           "colnames": ["rec_id", "datetime", "press1", "press4", "temp1","relhum1", "temp_ext",
-                       "relhum_ext", "volt", "counts1", "nsecs1", "N1T_C", "N1RH"]
+                       "relhum_ext", "volt", "counts1", "nsecs1", "N1T_C", "N1RH"],
+          "colnames2": ["rec_id", "datetime", "press1", "press4", "temp1","relhum1", "temp_ext",
+                       "relhum_ext", "volt", "counts1", "nsecs1", "N1T_C", "N1RH","sdiAdr","sdi1_1","sdi1_2","sdi1_3","sdi1_4","sdi1_5","sdi1_6"]
         },
 
     22: {"remotepattern": "CRSProbe_Data*.022*.txt",
          "sdpattern": "*.022",
          "colnames": ["rec_id", "datetime", "press1", "press4", "temp1","relhum1", "temp_ext",
-                       "relhum_ext", "volt", "counts1", "nsecs1", "N1T_C", "N1RH"]
+                       "relhum_ext", "volt", "counts1", "nsecs1", "N1T_C", "N1RH"],
+         "colnames2": ["rec_id", "datetime", "press1", "press4", "temp1","relhum1", "temp_ext",
+                       "relhum_ext", "volt", "counts1", "nsecs1", "N1T_C", "N1RH","sdiAdr","sdi1_1","sdi1_2","sdi1_3","sdi1_4","sdi1_5","sdi1_6"]
         },
 
     26: {"remotepattern": "up26_Data*.026*.txt",
@@ -59,7 +69,8 @@ crns = {
 
     28: {"remotepattern": "sonde28_Data_*.028*",
          "sdpattern": "*.028",
-         "colnames": ["rec_id", "datetime", "press1", "press4", "temp1", "relhum1", "volt", "counts1", "nsecs1", "temp2", "relhum2"]
+         "colnames": ["rec_id", "datetime", "press1", "press4", "temp1", "relhum1", "volt", "counts1", "nsecs1", "temp2", "relhum2"],
+         "colnames2": ["rec_id", "datetime", "press1", "press4", "temp1", "relhum1", "volt", "counts1", "nsecs1", "temp2", "relhum2","sdiAdr","sdi1_1","sdi1_2","sdi1_3","sdi1_4"]
         }
 }
 
