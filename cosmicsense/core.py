@@ -391,6 +391,40 @@ def D86(r, theta, press, Hveg, rhob, p0=8.321, p1=0.14249, p2=0.96655, p3=0.01, 
     x = (1 / rhob) * (p0 + p1 * (p2 + np.exp(-p3 * rescale_r(r, press, Hveg, theta))) * (p4 + theta) / (p5 + theta))
     return np.squeeze(x)
 
+def D86_simple(r, theta, press, Hveg, rhob, p0=8.321, p1=0.14249, p2=0.96655, p3=0.01, p4=20., p5=0.0429):
+    """Penetration depth, or rather the depth within which 86 % of neutrons probed the soil.
+
+    Based on Koehli et al. (2015) and Schroen et al. (2017).
+    (analogous to D86, but without the recombination of r and theta)
+
+    Parameters
+    ----------
+    r : float or 1d array of floats
+       radial distance (m) for which a weight should be returned
+    depth : float or 1d array of floats
+       depth (cm) for which a weight should be returned
+    theta : float or array of floats
+       Average volumetric soil moisture (m3/m3) in the footprint
+    press : float
+       Barometric pressure (hPa)
+    Hveg : float
+       Vegetation height (UNIT???)
+    rhob : float
+       Soil bulk density (kg/l)
+    p0 - p5: floats
+       Parameters
+
+    Returns
+    -------
+    output : float or array of floats of shape ``(len(r), len(theta))``, squeezed
+       Penetration depth (cm)
+
+    """
+    #r = np.atleast_1d(r)
+    #theta = np.atleast_1d(theta)
+    x = (1 / rhob) * (p0 + p1 * (p2 + np.exp(-p3 * rescale_r(r, press, Hveg, theta))) * (p4 + theta) / (p5 + theta))
+    return x
+
 
 def vertical_weight_koehli(r, depth, theta, press, Hveg, rhob):
     """Vertical weights for gven distance, depth, and environmental conditions.
