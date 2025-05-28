@@ -19,7 +19,7 @@ Module ``util`` contains a mixed bag of utilities.
 """
 
 import numpy as np
-import wradlib
+#import wradlib
 
 
 def xy_from_pointshp(shpfile):
