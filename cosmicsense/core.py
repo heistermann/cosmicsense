@@ -26,6 +26,7 @@ to soil moisture.
     penetration_depth_franz
     vertical_weight_franz
     D86
+    D86_simple
     vertical_weight_koehli
 
 """
