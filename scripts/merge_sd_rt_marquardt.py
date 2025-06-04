@@ -12,6 +12,7 @@ remotedir = "/home/maik/b2drop/cosmicsense/inbox/marquardt/timeseries/crns/remot
 trgdir = "/media/x/cosmicsense/data/marquardt/crns"
 tmpfile = "tmpfile.txt"
 tmpfile2 = "tmpfile2.txt"
+tmpfile3 = "tmpfile3.txt"
 ids = [1, 2, 4, 21, 22, 26, 27, 28]
 
 crns = {
@@ -50,7 +51,9 @@ crns = {
          "colnames": ["rec_id", "datetime", "press1", "press4", "temp1","relhum1", "temp_ext",
                        "relhum_ext", "volt", "counts1", "nsecs1", "N1T_C", "N1RH"],
          "colnames2": ["rec_id", "datetime", "press1", "press4", "temp1","relhum1", "temp_ext",
-                       "relhum_ext", "volt", "counts1", "nsecs1", "N1T_C", "N1RH","sdiAdr","sdi1_1","sdi1_2","sdi1_3","sdi1_4","sdi1_5","sdi1_6"]
+                       "relhum_ext", "volt", "counts1", "nsecs1", "N1T_C", "N1RH","sdiAdr","sdi1_1","sdi1_2","sdi1_3","sdi1_4","sdi1_5","sdi1_6"],
+         "colnames3": ["rec_id", "datetime", "press1", "press4", "temp1","relhum1", "temp_ext",
+                       "relhum_ext", "volt", "countsloc1", "nsecsloc1", "counts1", "nsecs1", "N1T_C", "N1RH","sdiAdrloc1","sdiloc1_1","sdiloc1_2","sdiloc1_3","sdiloc1_4","sdiAdr","sdi1_1","sdi1_2","sdi1_3","sdi1_4","sdi1_5","sdi1_6"]
         },
 
     26: {"remotepattern": "up26_Data*.026*.txt",
@@ -130,7 +133,7 @@ for i, id in enumerate(ids):
         myfile.close()
     print("")
 
-    if "colnames2" in crns[id].keys():
+    if ("colnames2" in crns[id].keys()) or ("colnames3" in crns[id].keys()):
         # Read all lines. potentially varying no of columns
         myfile = open(tmpfile, 'r')
         lines = myfile.readlines()
@@ -138,14 +141,24 @@ for i, id in enumerate(ids):
         # Write in seperate files
         myfile = open(tmpfile, 'w')
         myfile2 = open(tmpfile2, 'w')
+        myfile3 = open(tmpfile3, 'w')
         for line in lines:
             split = line.split(",")
             if len(split)==len(crns[id]["colnames"]):
                 myfile.write(line+"\n")
             if len(split)==len(crns[id]["colnames2"]):
                 myfile2.write(line+"\n")
+            try:
+                if len(split)==len(crns[id]["colnames3"]):
+                    myfile3.write(line+"\n")
+            except:
+                pass
         myfile.close()
         myfile2.close()
+        try:
+            myfile3.close()
+        except:
+            pass
 
     # MERGE
     df = pd.read_csv(tmpfile, sep=",", comment="#", header=None, error_bad_lines=False, warn_bad_lines=True)
@@ -156,6 +169,15 @@ for i, id in enumerate(ids):
                              error_bad_lines=False, warn_bad_lines=True)
             df2.columns = crns[id]["colnames2"]
             df = df2.append(df, sort=False)
+        except:
+            print("Problem in reading or appending data with diffferent column scenario")
+            raise
+    if "colnames3" in crns[id].keys():
+        try:
+            df3 = pd.read_csv(tmpfile3, sep=",", comment="#", header=None,
+                             error_bad_lines=False, warn_bad_lines=True)
+            df3.columns = crns[id]["colnames3"]
+            df = df3.append(df, sort=False)
         except:
             print("Problem in reading or appending data with diffferent column scenario")
             raise

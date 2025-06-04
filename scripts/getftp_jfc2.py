@@ -7,22 +7,23 @@ ftpserver = sys.argv[1]
 ftpuser = sys.argv[2]
 ftppw = sys.argv[3]
 trgdir = sys.argv[4]
-
+probes = eval(sys.argv[5])
 
 ftp = ftplib.FTP(ftpserver)
 ftp.login(ftpuser , ftppw)
 
-probes = [1,4,"c-4",12,21,22,26,31,33,34,35,36]
 
 for probe in probes:
     print("----------------------")
-    print("Processing %s" % probe)
-    if not probe=="c-4":
-        files = ftp.nlst('marquardt/sonde%d/' % probe)
-    else:
-        files = ftp.nlst('marquardt/%s/' % probe)
-    for file in files:
+    print("Processing %d" % probe)
+    subdir = 'wuestebach/sonde%d/' % probe
+    if probe==12:
+        subdir=""
+    for file in ftp.nlst(subdir):
         fname = os.path.basename(file)
+        if probe==12:
+            if not ".830_" in fname:
+                continue
         fpath = os.path.join(trgdir, str(probe), fname)
         if os.path.exists(fpath):
             print("EXISTS: %s" % file)
