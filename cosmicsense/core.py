@@ -26,7 +26,6 @@ to soil moisture.
     penetration_depth_franz
     vertical_weight_franz
     D86
-    D86_simple
     vertical_weight_koehli
 
 """
@@ -261,7 +260,7 @@ def rescale_r(r, press, Hveg, theta):
     return r / Fp(press) / Fveg(theta, Hveg)
 
 
-def horizontal_weight_koehli(r, press, Hveg, theta, h):
+def horizontal_weight_koehli(r, press, Hveg, theta, h, r_rescaled=None):
     """Horizontal weights presented by Koehli et al. (2015), modified by Schroen et al. (2017)
 
     Parameters
@@ -269,11 +268,15 @@ def horizontal_weight_koehli(r, press, Hveg, theta, h):
     r : float or 1d array of floats
        Distance to the CRNS probe (in meters)
 
+
     """
     # Container
     r = np.asarray(r)
     x = np.zeros(r.shape) * np.nan
-    r_st = rescale_r(r, press, Hveg, theta)
+    if r_rescaled is None: #if not precomputed, do it
+        r_st = rescale_r(r, press, Hveg, theta)
+    else:
+        r_st = r_rescaled
     # Index arrays
     ix1 = r <= 1
     ix2 = (r > 1) & (r <= 50)
@@ -392,7 +395,7 @@ def D86(r, theta, press, Hveg, rhob, p0=8.321, p1=0.14249, p2=0.96655, p3=0.01, 
     x = (1 / rhob) * (p0 + p1 * (p2 + np.exp(-p3 * rescale_r(r, press, Hveg, theta))) * (p4 + theta) / (p5 + theta))
     return np.squeeze(x)
 
-def D86_simple(r, theta, press, Hveg, rhob, p0=8.321, p1=0.14249, p2=0.96655, p3=0.01, p4=20., p5=0.0429):
+def D86_simple(r, theta, press, Hveg, rhob, p0=8.321, p1=0.14249, p2=0.96655, p3=0.01, p4=20., p5=0.0429, r_rescaled=None):
     """Penetration depth, or rather the depth within which 86 % of neutrons probed the soil.
 
     Based on Koehli et al. (2015) and Schroen et al. (2017).
@@ -414,6 +417,8 @@ def D86_simple(r, theta, press, Hveg, rhob, p0=8.321, p1=0.14249, p2=0.96655, p3
        Soil bulk density (kg/l)
     p0 - p5: floats
        Parameters
+    r_rescaled :
+        float, 1d- or 2d-array of floats [m], optional. Precalculated rescaled r.
 
     Returns
     -------
@@ -423,7 +428,9 @@ def D86_simple(r, theta, press, Hveg, rhob, p0=8.321, p1=0.14249, p2=0.96655, p3
     """
     #r = np.atleast_1d(r)
     #theta = np.atleast_1d(theta)
-    x = (1 / rhob) * (p0 + p1 * (p2 + np.exp(-p3 * rescale_r(r, press, Hveg, theta))) * (p4 + theta) / (p5 + theta))
+    if r_rescaled is None: #if not precomputed, do it
+        r_rescaled = rescale_r(r, press, Hveg, theta)
+    x = (1 / rhob) * (p0 + p1 * (p2 + np.exp(-p3 * r_rescaled)) * (p4 + theta) / (p5 + theta))
     return x
 
 
@@ -453,84 +460,6 @@ def vertical_weight_koehli(r, depth, theta, press, Hveg, rhob):
     depth, D = np.meshgrid(depth, D, indexing="ij")
     x = np.exp(-2 * depth / D)
     return np.squeeze(x)
-
-def vw_koehli_integral(r, layer_bounds, theta, press, Hveg, rhob):
-    """Calculate the integral of the vertical weight function between given layer bounds, and environmental conditions.
-    Based on Koehli et al. (2015) and Schrön et al. (2017). Adapted from vertical_weight_koehli.
-    Parameters
-    ----------
-    r : float or 1d-array of floats [m]
-    layer_bounds : 1d-array of floats [cm] with layerboundaries beginning from 0
-    theta : float [m³/m³]
-    press : float [mbar]
-    Hveg : float [m]
-    rhob : float [g/cm³]
-    Returns
-    -------
-    output : float or array of floats of shape ``(len(r), len(layer_bounds) - 1)``, squeezed
-       Integral of weights between boundaries
-
-    Example
-    -------
-    >>> layer_bounds = np.arange(0,12,2)*10
-    >>> #layer_bounds = np.array([0,10,30,50,100,200])
-    >>> r = test_dist
-    >>> press = press_oncamp
-    >>> Hveg = 0
-    >>> rhob = 1.4
-    >>> theta = 0.5
-    >>> stamm_vw(r, layer_bounds, theta, press, Hveg, rhob) # Since the layers have equal thickness, the integral is equal to the one of the vertical_weight_koehli function
-    """
-    #original variant (including unnecessary computations in D86 and respective conversions of arrays)
-    # r = np.atleast_1d(r)  # check if r is an array
-    #
-    # layer_bounds = np.atleast_1d(layer_bounds)  # check if layer_bounds is an array
-    #
-    # layer_bounds = layer_bounds[:, np.newaxis]  # expand layer bounds to 2D array
-    #
-    # D = cs.core.D86(
-    #     r, theta, press, Hveg, rhob
-    # )  # calculate depth of neutron signal, returns 1D array of length r
-    #
-    # #Calculate the integral of the vertical weight function for each boundary
-    # antider = (-D / 2) * np.exp(
-    #     -2 * layer_bounds / D
-    # )  # calculate antiderivative and returns 2D array of shape (len(layer_bounds), len(r))
-
-    #var corrected
-    # r = np.squeeze(r)  #
-    D = cs.core.D86_simple(
-        r, theta, press, Hveg, rhob
-    )  # calculate depth of neutron signal, returns 1D array of length r
-
-    #D.shape
-
-    layer_bounds = np.squeeze(layer_bounds) #[0:4]
-
-    #antider = layer_bounds[np.newaxis, :] / D.flatten()[:, np.newaxis]  # flatten D to 1D array
-
-    # for flattening D: does not preserve shape of D, so we need to reshape it later
-    # antider = (-D.flatten()[np.newaxis,:] / 2) * np.exp(
-    #     -2 * layer_bounds[:, np.newaxis] / D.flatten()[np.newaxis,:]
-    # )
-    #antider = antider.reshape(list(layer_bounds.shape) + list(D.shape))  # reshape D to 2D array with shape (len(r), 1)
-
-    if D.ndim==1: #for D being 1D
-        antider = (-D[np.newaxis, :] / 2) * np.exp(
-            -2 * layer_bounds[:, np.newaxis] / D[np.newaxis, :]
-        )
-
-    if D.ndim==2: #for D being 2D
-        antider = (-D[np.newaxis, :, :] / 2) * np.exp(
-            -2 * layer_bounds[:, np.newaxis, np.newaxis] / D[np.newaxis,:,:]
-        )
-
-    #antider.shape
-    weights = np.diff(
-        antider, axis=0
-    )  # calculate difference to get integral and returns 2D array of shape (len(layer_bounds) - 1, len(r))
-
-    return weights
 
 
 if __name__ == '__main__':
